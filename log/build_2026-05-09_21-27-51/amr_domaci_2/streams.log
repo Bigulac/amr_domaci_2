@@ -1,0 +1,40 @@
+[0.547s] Invoking command in '/home/bingulac/amr_domaci_2/src/amr_domaci_2': PYTHONPATH=/home/bingulac/amr_domaci_2/build/amr_domaci_2/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/bingulac/amr_domaci_2/install/amr_domaci_2/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/amr_domaci_2 build --build-base /home/bingulac/amr_domaci_2/build/amr_domaci_2/build install --record /home/bingulac/amr_domaci_2/build/amr_domaci_2/install.log --single-version-externally-managed install_data
+[0.747s] running egg_info
+[0.747s] creating ../../build/amr_domaci_2/amr_domaci_2.egg-info
+[0.748s] writing ../../build/amr_domaci_2/amr_domaci_2.egg-info/PKG-INFO
+[0.748s] writing dependency_links to ../../build/amr_domaci_2/amr_domaci_2.egg-info/dependency_links.txt
+[0.748s] writing entry points to ../../build/amr_domaci_2/amr_domaci_2.egg-info/entry_points.txt
+[0.749s] writing requirements to ../../build/amr_domaci_2/amr_domaci_2.egg-info/requires.txt
+[0.749s] writing top-level names to ../../build/amr_domaci_2/amr_domaci_2.egg-info/top_level.txt
+[0.749s] writing manifest file '../../build/amr_domaci_2/amr_domaci_2.egg-info/SOURCES.txt'
+[0.751s] reading manifest file '../../build/amr_domaci_2/amr_domaci_2.egg-info/SOURCES.txt'
+[0.752s] writing manifest file '../../build/amr_domaci_2/amr_domaci_2.egg-info/SOURCES.txt'
+[0.752s] running build
+[0.752s] running build_py
+[0.754s] creating /home/bingulac/amr_domaci_2/build/amr_domaci_2/build
+[0.754s] creating /home/bingulac/amr_domaci_2/build/amr_domaci_2/build/lib
+[0.754s] creating /home/bingulac/amr_domaci_2/build/amr_domaci_2/build/lib/amr_domaci_2
+[0.754s] copying amr_domaci_2/drive_2m.py -> /home/bingulac/amr_domaci_2/build/amr_domaci_2/build/lib/amr_domaci_2
+[0.754s] copying amr_domaci_2/op_mode_service.py -> /home/bingulac/amr_domaci_2/build/amr_domaci_2/build/lib/amr_domaci_2
+[0.754s] copying amr_domaci_2/__init__.py -> /home/bingulac/amr_domaci_2/build/amr_domaci_2/build/lib/amr_domaci_2
+[0.754s] running install
+[0.754s] running install_lib
+[0.761s] creating /home/bingulac/amr_domaci_2/install/amr_domaci_2/lib/python3.10/site-packages/amr_domaci_2
+[0.761s] copying /home/bingulac/amr_domaci_2/build/amr_domaci_2/build/lib/amr_domaci_2/drive_2m.py -> /home/bingulac/amr_domaci_2/install/amr_domaci_2/lib/python3.10/site-packages/amr_domaci_2
+[0.761s] copying /home/bingulac/amr_domaci_2/build/amr_domaci_2/build/lib/amr_domaci_2/op_mode_service.py -> /home/bingulac/amr_domaci_2/install/amr_domaci_2/lib/python3.10/site-packages/amr_domaci_2
+[0.761s] copying /home/bingulac/amr_domaci_2/build/amr_domaci_2/build/lib/amr_domaci_2/__init__.py -> /home/bingulac/amr_domaci_2/install/amr_domaci_2/lib/python3.10/site-packages/amr_domaci_2
+[0.762s] byte-compiling /home/bingulac/amr_domaci_2/install/amr_domaci_2/lib/python3.10/site-packages/amr_domaci_2/drive_2m.py to drive_2m.cpython-310.pyc
+[0.762s] byte-compiling /home/bingulac/amr_domaci_2/install/amr_domaci_2/lib/python3.10/site-packages/amr_domaci_2/op_mode_service.py to op_mode_service.cpython-310.pyc
+[0.763s] byte-compiling /home/bingulac/amr_domaci_2/install/amr_domaci_2/lib/python3.10/site-packages/amr_domaci_2/__init__.py to __init__.cpython-310.pyc
+[0.763s] running install_data
+[0.763s] creating /home/bingulac/amr_domaci_2/install/amr_domaci_2/share/ament_index
+[0.764s] creating /home/bingulac/amr_domaci_2/install/amr_domaci_2/share/ament_index/resource_index
+[0.764s] creating /home/bingulac/amr_domaci_2/install/amr_domaci_2/share/ament_index/resource_index/packages
+[0.765s] copying resource/amr_domaci_2 -> /home/bingulac/amr_domaci_2/install/amr_domaci_2/share/ament_index/resource_index/packages
+[0.766s] copying package.xml -> /home/bingulac/amr_domaci_2/install/amr_domaci_2/share/amr_domaci_2
+[0.766s] running install_egg_info
+[0.767s] Copying ../../build/amr_domaci_2/amr_domaci_2.egg-info to /home/bingulac/amr_domaci_2/install/amr_domaci_2/lib/python3.10/site-packages/amr_domaci_2-0.0.0-py3.10.egg-info
+[0.769s] running install_scripts
+[0.786s] Installing drive_2m script to /home/bingulac/amr_domaci_2/install/amr_domaci_2/lib/amr_domaci_2
+[0.786s] writing list of installed files to '/home/bingulac/amr_domaci_2/build/amr_domaci_2/install.log'
+[0.807s] Invoked command in '/home/bingulac/amr_domaci_2/src/amr_domaci_2' returned '0': PYTHONPATH=/home/bingulac/amr_domaci_2/build/amr_domaci_2/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/bingulac/amr_domaci_2/install/amr_domaci_2/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/amr_domaci_2 build --build-base /home/bingulac/amr_domaci_2/build/amr_domaci_2/build install --record /home/bingulac/amr_domaci_2/build/amr_domaci_2/install.log --single-version-externally-managed install_data

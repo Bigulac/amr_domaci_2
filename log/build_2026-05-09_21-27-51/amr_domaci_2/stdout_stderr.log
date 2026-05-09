@@ -1,0 +1,38 @@
+running egg_info
+creating ../../build/amr_domaci_2/amr_domaci_2.egg-info
+writing ../../build/amr_domaci_2/amr_domaci_2.egg-info/PKG-INFO
+writing dependency_links to ../../build/amr_domaci_2/amr_domaci_2.egg-info/dependency_links.txt
+writing entry points to ../../build/amr_domaci_2/amr_domaci_2.egg-info/entry_points.txt
+writing requirements to ../../build/amr_domaci_2/amr_domaci_2.egg-info/requires.txt
+writing top-level names to ../../build/amr_domaci_2/amr_domaci_2.egg-info/top_level.txt
+writing manifest file '../../build/amr_domaci_2/amr_domaci_2.egg-info/SOURCES.txt'
+reading manifest file '../../build/amr_domaci_2/amr_domaci_2.egg-info/SOURCES.txt'
+writing manifest file '../../build/amr_domaci_2/amr_domaci_2.egg-info/SOURCES.txt'
+running build
+running build_py
+creating /home/bingulac/amr_domaci_2/build/amr_domaci_2/build
+creating /home/bingulac/amr_domaci_2/build/amr_domaci_2/build/lib
+creating /home/bingulac/amr_domaci_2/build/amr_domaci_2/build/lib/amr_domaci_2
+copying amr_domaci_2/drive_2m.py -> /home/bingulac/amr_domaci_2/build/amr_domaci_2/build/lib/amr_domaci_2
+copying amr_domaci_2/op_mode_service.py -> /home/bingulac/amr_domaci_2/build/amr_domaci_2/build/lib/amr_domaci_2
+copying amr_domaci_2/__init__.py -> /home/bingulac/amr_domaci_2/build/amr_domaci_2/build/lib/amr_domaci_2
+running install
+running install_lib
+creating /home/bingulac/amr_domaci_2/install/amr_domaci_2/lib/python3.10/site-packages/amr_domaci_2
+copying /home/bingulac/amr_domaci_2/build/amr_domaci_2/build/lib/amr_domaci_2/drive_2m.py -> /home/bingulac/amr_domaci_2/install/amr_domaci_2/lib/python3.10/site-packages/amr_domaci_2
+copying /home/bingulac/amr_domaci_2/build/amr_domaci_2/build/lib/amr_domaci_2/op_mode_service.py -> /home/bingulac/amr_domaci_2/install/amr_domaci_2/lib/python3.10/site-packages/amr_domaci_2
+copying /home/bingulac/amr_domaci_2/build/amr_domaci_2/build/lib/amr_domaci_2/__init__.py -> /home/bingulac/amr_domaci_2/install/amr_domaci_2/lib/python3.10/site-packages/amr_domaci_2
+byte-compiling /home/bingulac/amr_domaci_2/install/amr_domaci_2/lib/python3.10/site-packages/amr_domaci_2/drive_2m.py to drive_2m.cpython-310.pyc
+byte-compiling /home/bingulac/amr_domaci_2/install/amr_domaci_2/lib/python3.10/site-packages/amr_domaci_2/op_mode_service.py to op_mode_service.cpython-310.pyc
+byte-compiling /home/bingulac/amr_domaci_2/install/amr_domaci_2/lib/python3.10/site-packages/amr_domaci_2/__init__.py to __init__.cpython-310.pyc
+running install_data
+creating /home/bingulac/amr_domaci_2/install/amr_domaci_2/share/ament_index
+creating /home/bingulac/amr_domaci_2/install/amr_domaci_2/share/ament_index/resource_index
+creating /home/bingulac/amr_domaci_2/install/amr_domaci_2/share/ament_index/resource_index/packages
+copying resource/amr_domaci_2 -> /home/bingulac/amr_domaci_2/install/amr_domaci_2/share/ament_index/resource_index/packages
+copying package.xml -> /home/bingulac/amr_domaci_2/install/amr_domaci_2/share/amr_domaci_2
+running install_egg_info
+Copying ../../build/amr_domaci_2/amr_domaci_2.egg-info to /home/bingulac/amr_domaci_2/install/amr_domaci_2/lib/python3.10/site-packages/amr_domaci_2-0.0.0-py3.10.egg-info
+running install_scripts
+Installing drive_2m script to /home/bingulac/amr_domaci_2/install/amr_domaci_2/lib/amr_domaci_2
+writing list of installed files to '/home/bingulac/amr_domaci_2/build/amr_domaci_2/install.log'

@@ -1,0 +1,32 @@
+from setuptools import find_packages, setup
+
+package_name = 'amr_domaci_2'
+
+setup(
+    name=package_name,
+    version='0.0.0',
+    packages=find_packages(exclude=['test']),
+    data_files=[
+        ('share/ament_index/resource_index/packages',
+            ['resource/' + package_name]),
+        ('share/' + package_name, ['package.xml']),
+    ],
+    install_requires=['setuptools'],
+    zip_safe=True,
+    maintainer='bingulac',
+    maintainer_email='bingulac@todo.todo',
+    description='TODO: Package description',
+    license='TODO: License declaration',
+    extras_require={
+        'test': [
+            'pytest',
+        ],
+    },
+    entry_points={
+        'console_scripts': [
+        'drive_2m = amr_domaci_2.drive_2m:main',
+        'op_mode_service = amr_domaci_2.op_mode_service:main',
+        'set_target_point = amr_domaci_2.set_target_point:main',
+        ],
+    },
+)
