@@ -39,6 +39,7 @@ from geometry_msgs.msg import Twist
 from geometry_msgs.msg import TwistStamped
 from std_msgs.msg import Bool
 import rclpy
+from rclpy.node import Node
 from rclpy.clock import Clock
 from rclpy.qos import QoSProfile
 
@@ -78,6 +79,31 @@ CTRL-C za prekid kontrole
 e = """
 Communications Failed
 """
+
+class TeleopNode(Node):
+    def __init__(self):
+        super().__init__('teleop_keyboard')
+
+        ROS_DISTRO = os.environ.get('ROS_DISTRO')
+        qos = QoSProfile(depth=10)
+        if ROS_DISTRO == 'humble':
+            self.pub = self.create_publisher(Twist, 'cmd_vel', qos)
+        else:
+            self.pub = self.create_publisher(TwistStamped, 'cmd_vel', qos)
+        
+        self.sub = self.create_subscription(
+            Bool,
+            'set_op_mode/active_mode',
+            self.active_mode_callback,
+            qos
+        )
+
+        self.active = False
+
+    def active_mode_callback(self, msg: Bool):
+        if not self.active and not msg.data:
+            self.get_logger().info('Robot je u manuelnom rezimu.')
+        self.active = not msg.data
 
 
 def get_key(settings):
@@ -135,14 +161,6 @@ def check_angular_limit_velocity(velocity):
     else:
         return constrain(velocity, -WAFFLE_MAX_ANG_VEL, WAFFLE_MAX_ANG_VEL)
 
-def active_mode_callback(msg: Bool):
-    global active 
-    active = not msg
-    if active:
-        print("Manuelni režim aktiviran")
-
-active = None
-
 def main():
     settings = None
     
@@ -150,30 +168,34 @@ def main():
         settings = termios.tcgetattr(sys.stdin)
 
     rclpy.init()
-    ROS_DISTRO = os.environ.get('ROS_DISTRO')
-    qos = QoSProfile(depth=10)
-    node = rclpy.create_node('teleop_keyboard')
-    if ROS_DISTRO == 'humble':
-        pub = node.create_publisher(Twist, 'cmd_vel', qos)
-        sub = node.create_subscription(
-            Bool,
-            'set_op_mode/active_mode',
-            active_mode_callback,
-            10
-        )
-    else:
-        pub = node.create_publisher(TwistStamped, 'cmd_vel', qos)
+    # ROS_DISTRO = os.environ.get('ROS_DISTRO')
+    # qos = QoSProfile(depth=10)
+    # node = rclpy.create_node('teleop_keyboard')
+    # if ROS_DISTRO == 'humble':
+    #     pub = node.create_publisher(Twist, 'cmd_vel', qos)
+    # else:
+    #     pub = node.create_publisher(TwistStamped, 'cmd_vel', qos)
+    # sub = node.create_subscription(
+    #     Bool,
+    #     'set_op_mode/active_mode',
+    #     active_mode_callback,
+    #     10
+    # )
 
-    status = 0
+    ROS_DISTRO = os.environ.get('ROS_DISTRO')
+    node = TeleopNode()
+
+    status = 20
     target_linear_velocity = 0.0
     target_angular_velocity = 0.0
     control_linear_velocity = 0.0
     control_angular_velocity = 0.0
 
     try:
-        print(msg)
+        # print(msg)
         while (1):
-            if active:
+            rclpy.spin_once(node)
+            if node.active:
                 key = get_key(settings)
                 if key == 'w':
                     target_linear_velocity =\
@@ -229,7 +251,7 @@ def main():
                     twist.angular.y = 0.0
                     twist.angular.z = control_angular_velocity
 
-                    pub.publish(twist)
+                    node.pub.publish(twist)
                 else:
                     twist_stamped = TwistStamped()
                     twist_stamped.header.stamp = Clock().now().to_msg()
@@ -242,7 +264,38 @@ def main():
                     twist_stamped.twist.angular.y = 0.0
                     twist_stamped.twist.angular.z = control_angular_velocity
 
-                    pub.publish(twist_stamped)
+                    node.pub.publish(twist_stamped)
+
+            elif control_linear_velocity != 0.0 or control_angular_velocity != 0.0:
+                target_linear_velocity = 0.0
+                control_linear_velocity = 0.0
+                target_angular_velocity = 0.0
+                control_angular_velocity = 0.0
+                status = 20
+                if ROS_DISTRO == 'humble':
+                    twist = Twist()
+                    twist.linear.x = 0.0
+                    twist.linear.y = 0.0
+                    twist.linear.z = 0.0
+
+                    twist.angular.x = 0.0
+                    twist.angular.y = 0.0
+                    twist.angular.z = 0.0
+
+                    node.pub.publish(twist)
+                else:
+                    twist_stamped = TwistStamped()
+                    twist_stamped.header.stamp = Clock().now().to_msg()
+                    twist_stamped.header.frame_id = ''
+                    twist_stamped.twist.linear.x = 0.0
+                    twist_stamped.twist.linear.y = 0.0
+                    twist_stamped.twist.linear.z = 0.0
+
+                    twist_stamped.twist.angular.x = 0.0
+                    twist_stamped.twist.angular.y = 0.0
+                    twist_stamped.twist.angular.z = 0.0
+
+                    node.pub.publish(twist_stamped)
 
     except Exception as e:
         print(e)
@@ -256,18 +309,18 @@ def main():
             twist.angular.x = 0.0
             twist.angular.y = 0.0
             twist.angular.z = 0.0
-            pub.publish(twist)
+            node.pub.publish(twist)
         else:
             twist_stamped = TwistStamped()
             twist_stamped.header.stamp = Clock().now().to_msg()
             twist_stamped.header.frame_id = ''
-            twist_stamped.twist.linear.x = control_linear_velocity
+            twist_stamped.twist.linear.x = 0.0
             twist_stamped.twist.linear.y = 0.0
             twist_stamped.twist.linear.z = 0.0
             twist_stamped.twist.angular.x = 0.0
             twist_stamped.twist.angular.y = 0.0
-            twist_stamped.twist.angular.z = control_angular_velocity
-            pub.publish(twist_stamped)
+            twist_stamped.twist.angular.z = 0.0
+            node.pub.publish(twist_stamped)
 
         if os.name != 'nt':
             termios.tcsetattr(sys.stdin, termios.TCSADRAIN, settings)
