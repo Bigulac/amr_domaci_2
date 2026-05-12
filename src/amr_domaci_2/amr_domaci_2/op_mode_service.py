@@ -1,73 +1,57 @@
 import rclpy
-from rclpy.lifecycle import Node
-from rclpy.lifecycle import State
-from rclpy.lifecycle import TransitionCallbackReturn
-from std_msgs.msg import String
+from rclpy.node import Node
 
-class LifecycleTalker(Node):
+from std_msgs.msg import Bool
+from std_srvs.srv import SetBool
+
+class OpModeService(Node):
 
     def __init__(self):
-        super().__init__('play_button')
+        super().__init__('choose_op_mode')
 
-        self.pub = None
-        self.timer = None
-        self._count = 0
+        """
+        Radni režimi
+        False - manuelni režim, kontrola preko tastature
+        True - automatski režim, zadavanje cilja"""
+        self.op_mode = None
 
-    def publish(self):
-        """Publish a new message when enabled."""
-        msg = String()
-        msg.data = "Lifecycle HelloWorld #" + str(self._count)
-        self._count += 1
+        self.set_op_mode_srv = self.create_service(SetBool, 'set_op_mode', self.callback_set_op_mode)
 
-        # Only if the publisher is in an active state, the message transfer is
-        # enabled and the message actually published.
-        if self.pub is not None:
-            self.pub.publish(msg)
-            self.get_logger().info(f'Lifecycle publisher is active. Published: [{msg.data}]')
+        self.active_mode_pub = self.create_publisher(Bool, 'set_op_mode/active_mode', 10)
+        
+    def callback_set_op_mode(self, request, response):
+   
+        if request.data:
+            self.op_mode = True
+            response.message = "Režim rada promenjen u automatski"
+        else:
+            self.locked = False
+            response.message = "Režim rada promenjen u manuelni"
 
-    def on_configure(self, state: State) -> TransitionCallbackReturn:
-        self.pub = self.create_lifecycle_publisher(String, "lifecycle_chatter", 10)
+        response.success = True
 
-        self.get_logger().info("on_configure() is called.")
-        return super().on_configure(state)
+        self.get_logger().info(response.message)
+        return response
+        
+    
 
-    def on_activate(self, state: State) -> TransitionCallbackReturn:
-        # Log, only for demo purposes
-        self.get_logger().info("on_activate() is called.")
-        self.timer = self.create_timer(1.0, self.publish)
-
-        return super().on_activate(state)
-
-    def on_deactivate(self, state: State) -> TransitionCallbackReturn:
-        self.get_logger().info("on_deactivate() is called.")
-        self.destroy_timer(self.timer)
-        return super().on_deactivate(state)
-
-    def on_cleanup(self, state: State) -> TransitionCallbackReturn:
-        self.destroy_timer(self.timer)
-        self.destroy_publisher(self.pub)
-
-        self.get_logger().info('on_cleanup() is called.')
-        return super().on_cleanup(state)
-
-    def on_shutdown(self, state: State) -> TransitionCallbackReturn:
-        self.destroy_timer(self.timer)
-        self.destroy_publisher(self.pub)
-
-        self.get_logger().info('on_shutdown() is called.')
-        return super().on_shutdown(state)
-
+init_msg = """
+Promena režima rada
+Uneti True za perbacivanje u automatski režim, a False za prebacivanje u manuelni režim.
+Promenu vršiti upisom sledeće komande:
+ros2 service call /set_op_mode std_srvs/srv/SetBool \"{data: <True/False>}\" '
+"""
 
 def main():
     rclpy.init()
+    print(init_msg)
 
-    executor = rclpy.executors.SingleThreadedExecutor()
-    lc_node = LifecycleTalker()
-    executor.add_node(lc_node)
+    op_mode = OpModeService()
+
     try:
-        executor.spin()
-    except (KeyboardInterrupt, rclpy.executors.ExternalShutdownException):
-        lc_node.destroy_node()
+        op_mode.spin()
+    except KeyboardInterrupt:
+        op_mode.destroy_node()
 
 
 if __name__ == '__main__':
