@@ -1,3 +1,0 @@
-[console_scripts]
-drive_2m = amr_domaci_2.drive_2m:main
-

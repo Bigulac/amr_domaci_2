@@ -24,9 +24,9 @@ setup(
     },
     entry_points={
         'console_scripts': [
-        'drive_2m = amr_domaci_2.drive_2m:main',
         'op_mode_service = amr_domaci_2.op_mode_service:main',
-        'set_target_point = amr_domaci_2.set_target_point:main',
+        'drive_to_target_point = amr_domaci_2.drive_to_target_point:main',
+        'manual_control = amr_domaci_2.manual_control:main',
         ],
     },
 )
