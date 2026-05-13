@@ -118,6 +118,7 @@ def get_key(settings):
 
     termios.tcsetattr(sys.stdin, termios.TCSADRAIN, settings)
     return key
+    return key
 
 
 def print_vels(target_linear_velocity, target_angular_velocity):
@@ -166,6 +167,10 @@ def main():
     
     if os.name != 'nt':
         settings = termios.tcgetattr(sys.stdin)
+        # if sys.stdin.isatty():
+        #     settings = termios.tcgetattr(sys.stdin)
+        # else:
+        #     settings = None
 
     rclpy.init()
     # ROS_DISTRO = os.environ.get('ROS_DISTRO')

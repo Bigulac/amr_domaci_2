@@ -14,6 +14,8 @@ def generate_launch_description() :
             executable='manual_control',
             name='manual_control',
             output='screen',
+            emulate_tty=True,
+            prefix='xterm -e',
         ),
         Node(
             package='amr_domaci_2',
