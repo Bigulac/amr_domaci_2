@@ -85,7 +85,7 @@ class DriveRobot(Node):
             self.previous_x = x
             self.previous_y = y
             self.odom_received = True
-            self.get_logger().info('Primljena prva /odom poruka.')
+            # self.get_logger().info('Primljena prva /odom poruka.')
             return
 
         dx = x - self.previous_x
@@ -107,6 +107,8 @@ class DriveRobot(Node):
         if msg.data:
             self.active = True
             self.state = 'WAITING' if self.state == 'OFF' else self.state
+            if self.state == "WAITING":
+                self.set_target()
         else:
             self.active = False
             if self.state != 'OFF':
@@ -196,7 +198,7 @@ class DriveRobot(Node):
 
         self.cmd_vel_pub.publish(msg)
 
-    def set_target(self, request, response):
+    """def set_target(self, request, response):
         self.target_x = request.x
         self.target_y = request.y
         self.target_beta = (request.beta * math.pi / 180) % (2 * math.pi)
@@ -205,7 +207,18 @@ class DriveRobot(Node):
         response.success = True
         self.get_logger().info('Primljena ciljna pozicija i orijentacija. Robot se usmerava ka zeljenoj poziciji.')
         return response
+    """
 
+    def set_target(self):
+        print(init_msg)
+        self.target_x = float(input("Unesi x: ")) if self.active else 0
+        self.target_y = float(input("Unesi y: ")) if self.active else 0
+        self.target_beta = float(input("Unesi beta: ")) if self.active else 0
+        self.target_beta = (self.target_beta * math.pi / 180) % (2 * math.pi)
+        self.target_beta = self.target_beta - (0 if self.target_beta <= math.pi else 2 * math.pi)
+        self.state = 'ALIGN'
+        
+    
     def stop_robot(self):
         ROS_DISTRO = os.environ.get('ROS_DISTRO')
 

@@ -8,6 +8,8 @@ def generate_launch_description() :
             executable='drive_to_target_point',
             name='drive_to_target_point',
             output='screen',
+            emulate_tty=True,
+            prefix='xterm -hold -e',
         ),
         Node(
             package='amr_domaci_2',
@@ -15,7 +17,7 @@ def generate_launch_description() :
             name='manual_control',
             output='screen',
             emulate_tty=True,
-            prefix='xterm -e',
+            prefix='xterm -hold -e',
         ),
         Node(
             package='amr_domaci_2',
