@@ -2,11 +2,9 @@ package.xml
 setup.cfg
 setup.py
 amr_domaci_2/__init__.py
-amr_domaci_2/drive_2m.py
 amr_domaci_2/drive_to_target_point.py
 amr_domaci_2/manual_control.py
 amr_domaci_2/op_mode_service.py
-amr_domaci_2/set_target_point.py
 amr_domaci_2.egg-info/PKG-INFO
 amr_domaci_2.egg-info/SOURCES.txt
 amr_domaci_2.egg-info/dependency_links.txt
@@ -14,4 +12,5 @@ amr_domaci_2.egg-info/entry_points.txt
 amr_domaci_2.egg-info/requires.txt
 amr_domaci_2.egg-info/top_level.txt
 amr_domaci_2.egg-info/zip-safe
+launch/amr_domaci_2.launch.py
 resource/amr_domaci_2

@@ -5,14 +5,20 @@ def generate_launch_description() :
     return LaunchDescription([
         Node(
             package='amr_domaci_2',
-            executable='talker',
-            name='talker',
+            executable='drive_to_target_point',
+            name='drive_to_target_point',
             output='screen',
         ),
         Node(
             package='amr_domaci_2',
-            executable='listener',
-            name='listener',
+            executable='manual_control',
+            name='manual_control',
+            output='screen',
+        ),
+        Node(
+            package='amr_domaci_2',
+            executable='op_mode_service',
+            name='op_mode_service',
             output='screen',
         ),
     ])
